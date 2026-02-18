@@ -316,7 +316,7 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
     <li><a id="nav-instr">INSTRUCTIONS</a></li>
   </ul>
   <div class="nav-right">
-    <div class="nav-email"><div class="dot"></div>support@daisho.tech</div>
+    <div class="nav-email"><div class="dot"></div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c0b3b5b0b0afb2b480a4a1a9b3a8afeeb4a5a3a8">[email&#160;protected]</a></div>
   </div>
 </nav>
 
@@ -357,7 +357,7 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
         <p class="restricted-text">
           This platform does <strong>not</strong> offer public sign-up.<br>
           Membership is available by <strong>invitation only</strong>.
-          <span class="restricted-email">Email: <a href="mailto:support@daisho.tech" style="color:var(--green);">support@daisho.tech</a></span>
+          <span class="restricted-email">Email: <a href="/cdn-cgi/l/email-protection#3e4d4b4e4e514c4a7e5a5f574d5651104a5b5d56" style="color:var(--green);"><span class="__cf_email__" data-cfemail="44373134342b36300420252d372c2b6a3021272c">[email&#160;protected]</span></a></span>
         </p>
         <button class="link-btn" id="btn-open-instr">&#9658; &nbsp;READ INSTRUCTIONS</button>
       </div>
@@ -482,7 +482,7 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
       <div class="notice-box">
         <p>
           After your payment is received and confirmed, your invitation will be sent to the email address provided <strong>within 24 hours</strong>. Please ensure that all submitted information is correct and accurate.<br><br>
-          <span class="warn">If you do not receive your invitation within 24 hours, please resubmit your details using this form. Email: <a href="mailto:support@daisho.tech" style="color:var(--amber);text-decoration:underline;">support@daisho.tech</a> &amp; <a href="mailto:admin@daisho.tech" style="color:var(--amber);text-decoration:underline;">admin@daisho.tech</a></span>
+          <span class="warn">If you do not receive your invitation within 24 hours, please resubmit your details using this form. Email: <a href="/cdn-cgi/l/email-protection#2a595f5a5a45585e6a4e4b43594245045e4f4942" style="color:var(--amber);text-decoration:underline;"><span class="__cf_email__" data-cfemail="04777174746b76704460656d776c6b2a7061676c">[email&#160;protected]</span></a> &amp; <a href="/cdn-cgi/l/email-protection#650401080c0b2501040c160d0a4b1100060d" style="color:var(--amber);text-decoration:underline;"><span class="__cf_email__" data-cfemail="7011141d191e3014111903181f5e04151318">[email&#160;protected]</span></a></span>
         </p>
       </div>
     </div>
@@ -490,7 +490,7 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function () {
   "use strict";
 
@@ -596,7 +596,7 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
     btn.textContent = "\u25BA  AUTHENTICATING\u2026";
     setTimeout(function () {
       btn.textContent = "\u25BA  AUTHENTICATE";
-      showAlert("login-alert", "Access granted. Welcome back, " + u + ".", false);
+      showAlert("login-alert", "Access denied.", true);
     }, 1600);
   }
 
@@ -811,25 +811,4 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
     if (copyErc) copyErc.addEventListener("click", function () { copyAddr("addr-erc", this); });
 
     var addrTrc = get("addr-trc");
-    if (addrTrc) addrTrc.addEventListener("click", function () { copyAddr("addr-trc", get("copy-trc")); });
-
-    var addrBep = get("addr-bep");
-    if (addrBep) addrBep.addEventListener("click", function () { copyAddr("addr-bep", get("copy-bep")); });
-
-    var addrErc = get("addr-erc");
-    if (addrErc) addrErc.addEventListener("click", function () { copyAddr("addr-erc", get("copy-erc")); });
-
-    var btnSubmitPayment = get("btn-submit-payment");
-    if (btnSubmitPayment) btnSubmitPayment.addEventListener("click", submitPayment);
-  }
-
-  if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", wireEvents);
-  } else {
-    wireEvents();
-  }
-
-}());
-</script>
-</body>
-</html>
+    if (addrTrc) addrTrc.addEventListener("click", function () { copyAddr("addr-t
