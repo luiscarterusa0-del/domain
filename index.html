@@ -316,7 +316,7 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
     <li><a id="nav-instr">INSTRUCTIONS</a></li>
   </ul>
   <div class="nav-right">
-    <div class="nav-email"><div class="dot"></div><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="ff8c8a8f8f908d8bbf9b9e968c9790d18b9a9c97">[email&#160;protected]</a></div>
+    <div class="nav-email"><div class="dot"></div>support@daisho.tech</div>
   </div>
 </nav>
 
@@ -357,7 +357,7 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
         <p class="restricted-text">
           This platform does <strong>not</strong> offer public sign-up.<br>
           Membership is available by <strong>invitation only</strong>.
-          <span class="restricted-email">Email: <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="295a5c5959465b5d694d48405a4146075d4c4a41">[email&#160;protected]</a></span>
+          <span class="restricted-email">Email: <a href="mailto:support@daisho.tech" style="color:var(--green);">support@daisho.tech</a></span>
         </p>
         <button class="link-btn" id="btn-open-instr">&#9658; &nbsp;READ INSTRUCTIONS</button>
       </div>
@@ -482,7 +482,7 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
       <div class="notice-box">
         <p>
           After your payment is received and confirmed, your invitation will be sent to the email address provided <strong>within 24 hours</strong>. Please ensure that all submitted information is correct and accurate.<br><br>
-          <span class="warn">If you do not receive your invitation within 24 hours, please resubmit your details using this form. Email: <a href="/cdn-cgi/l/email-protection#0a797f7a7a65787e4a6e6b63796265247e6f6962" style="color:var(--amber);text-decoration:underline;"><span class="__cf_email__" data-cfemail="cdbeb8bdbda2bfb98da9aca4bea5a2e3b9a8aea5">[email&#160;protected]</span></a> &amp; <a href="/cdn-cgi/l/email-protection#4021242d292e0024212933282f6e34252328" style="color:var(--amber);text-decoration:underline;"><span class="__cf_email__" data-cfemail="ee8f8a838780ae8a8f879d8681c09a8b8d86">[email&#160;protected]</span></a></span>
+          <span class="warn">If you do not receive your invitation within 24 hours, please resubmit your details using this form. Email: <a href="mailto:support@daisho.tech" style="color:var(--amber);text-decoration:underline;">support@daisho.tech</a> &amp; <a href="mailto:admin@daisho.tech" style="color:var(--amber);text-decoration:underline;">admin@daisho.tech</a></span>
         </p>
       </div>
     </div>
@@ -490,7 +490,7 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (function () {
   "use strict";
 
@@ -715,24 +715,58 @@ main { position: relative; z-index: 10; height: 100vh; display: flex; align-item
   })();
 
   (function fetchIP() {
-    fetch("https://ipapi.co/json/")
+    function fillData(d) {
+      sp("sp-ip",      d.ip || d.query || "N/A");
+      sp("sp-isp",     d.org || d.isp || d.as || "N/A");
+      sp("sp-asn",     d.asn || (d.as ? d.as.split(" ")[0] : "N/A"));
+      sp("sp-country", (d.country_name || d.country || "N/A") + (d.country_code || d.countryCode ? " [" + (d.country_code || d.countryCode) + "]" : ""));
+      sp("sp-city",    (d.region || d.regionName || "N/A") + " / " + (d.city || "N/A"));
+      sp("sp-tz",      d.timezone || d.time_zone && d.time_zone.name || "N/A");
+      sp("sp-coords",  (d.latitude || d.lat) && (d.longitude || d.lon) ? (d.latitude || d.lat) + ", " + (d.longitude || d.lon) : "N/A");
+      sp("sp-host",    d.hostname || d.ip || d.query || "N/A");
+      var org = (d.org || d.isp || d.as || "").toLowerCase();
+      var isProxy = /vpn|proxy|hosting|datacenter|cloud|server|digitalocean|linode|vultr|ovh|hetzner|amazon|google|microsoft|cloudflare/.test(org);
+      sp("sp-proxy", isProxy ? "POSSIBLE VPN/PROXY" : "NOT DETECTED", isProxy ? "amber" : "");
+    }
+    function markUnavailable() {
+      var ids = ["sp-ip","sp-isp","sp-asn","sp-country","sp-city","sp-tz","sp-coords","sp-host","sp-proxy"];
+      for (var i = 0; i < ids.length; i++) { sp(ids[i], "UNAVAILABLE", "red"); }
+    }
+    // Try ip-api.com first (free, no key, CORS-friendly)
+    fetch("http://ip-api.com/json/?fields=status,message,country,countryCode,regionName,city,lat,lon,timezone,isp,org,as,query,hosting,proxy,mobile")
       .then(function(r) { return r.json(); })
       .then(function(d) {
-        sp("sp-ip",      d.ip || "N/A");
-        sp("sp-isp",     d.org || d.isp || "N/A");
-        sp("sp-asn",     d.asn || "N/A");
-        sp("sp-country", (d.country_name || "N/A") + (d.country_code ? " [" + d.country_code + "]" : ""));
-        sp("sp-city",    (d.region || "N/A") + " / " + (d.city || "N/A"));
-        sp("sp-tz",      d.timezone || "N/A");
-        sp("sp-coords",  (d.latitude && d.longitude) ? d.latitude + ", " + d.longitude : "N/A");
-        sp("sp-host",    d.hostname || d.ip || "N/A");
-        var org = (d.org || "").toLowerCase();
-        var isProxy = /vpn|proxy|hosting|datacenter|cloud|server|digitalocean|linode|vultr|ovh|hetzner|amazon|google|microsoft|cloudflare/.test(org);
-        sp("sp-proxy", isProxy ? "POSSIBLE VPN/PROXY" : "NOT DETECTED", isProxy ? "amber" : "");
+        if (d.status === "success") {
+          sp("sp-ip",      d.query || "N/A");
+          sp("sp-isp",     d.org || d.isp || "N/A");
+          sp("sp-asn",     d.as ? d.as.split(" ")[0] : "N/A");
+          sp("sp-country", (d.country || "N/A") + (d.countryCode ? " [" + d.countryCode + "]" : ""));
+          sp("sp-city",    (d.regionName || "N/A") + " / " + (d.city || "N/A"));
+          sp("sp-tz",      d.timezone || "N/A");
+          sp("sp-coords",  d.lat && d.lon ? d.lat + ", " + d.lon : "N/A");
+          sp("sp-host",    d.query || "N/A");
+          var isProxy = d.proxy || d.hosting || /vpn|proxy|hosting|datacenter|cloud/.test((d.org || d.isp || "").toLowerCase());
+          sp("sp-proxy", isProxy ? "POSSIBLE VPN/PROXY" : "NOT DETECTED", isProxy ? "amber" : "");
+        } else { throw new Error("failed"); }
       })
       .catch(function() {
-        var ids = ["sp-ip","sp-isp","sp-asn","sp-country","sp-city","sp-tz","sp-coords","sp-host","sp-proxy"];
-        for (var i = 0; i < ids.length; i++) { sp(ids[i], "UNAVAILABLE", "red"); }
+        // Fallback: ipinfo.io
+        fetch("https://ipinfo.io/json")
+          .then(function(r) { return r.json(); })
+          .then(function(d) {
+            var coords = d.loc ? d.loc.split(",") : [];
+            sp("sp-ip",      d.ip || "N/A");
+            sp("sp-isp",     d.org || "N/A");
+            sp("sp-asn",     d.org ? d.org.split(" ")[0] : "N/A");
+            sp("sp-country", (d.country || "N/A"));
+            sp("sp-city",    (d.region || "N/A") + " / " + (d.city || "N/A"));
+            sp("sp-tz",      d.timezone || "N/A");
+            sp("sp-coords",  coords.length === 2 ? coords[0] + ", " + coords[1] : "N/A");
+            sp("sp-host",    d.hostname || d.ip || "N/A");
+            var isProxy = /vpn|proxy|hosting|datacenter|cloud/.test((d.org || "").toLowerCase());
+            sp("sp-proxy", isProxy ? "POSSIBLE VPN/PROXY" : "NOT DETECTED", isProxy ? "amber" : "");
+          })
+          .catch(markUnavailable);
       });
   })();
 
